@@ -40,7 +40,7 @@ public class Configuration
     /**
      * Should we check minecraft.net auth.
      */
-    private boolean onlineMode = true;
+    private boolean onlineMode = false;
     private int playerLimit = -1;
     private Collection<String> disabledCommands;
     private int throttle = 4000;

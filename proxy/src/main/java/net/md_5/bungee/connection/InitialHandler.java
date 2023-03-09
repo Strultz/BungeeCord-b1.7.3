@@ -180,20 +180,10 @@ public class InitialHandler extends PacketHandler implements PendingConnection
             disconnect( bungee.getTranslation( "outdated_client" ) );
         }
 		
-		/*if ( this.onlineMode )
+		if ( this.onlineMode )
         {
             String encName = URLEncoder.encode( InitialHandler.this.getName(), "UTF-8" );
-
-            MessageDigest sha = MessageDigest.getInstance( "SHA-1" );
-            for ( byte[] bit : new byte[][]
-            {
-                request.getServerId().getBytes( "ISO_8859_1" ), sharedKey.getEncoded(), EncryptionUtil.keys.getPublic().getEncoded()
-            } )
-            {
-                sha.update( bit );
-            }
-
-            String encodedHash = URLEncoder.encode( new BigInteger( sha.digest() ).toString( 16 ), "UTF-8" );
+            String encodedHash = URLEncoder.encode( InitialHandler.this.serverId, "UTF-8" );
             String authURL = "http://session.minecraft.net/game/checkserver.jsp?user=" + encName + "&serverId=" + encodedHash;
 
             Callback<String> handler = new Callback<String>()
@@ -222,28 +212,7 @@ public class InitialHandler extends PacketHandler implements PendingConnection
         } else
         {
             finish();
-        }*/
-		
-		finish(); // TODO: Fix online mode
-
-        UserConnection userCon = new UserConnection( bungee, ch, getName(), this );
-        userCon.init();
-
-        bungee.getPluginManager().callEvent( new PostLoginEvent( userCon ) );
-
-        ch.getHandle().pipeline().get( HandlerBoss.class ).setHandler( new UpstreamBridge( bungee, userCon ) );
-
-        ServerInfo server;
-        if ( bungee.getReconnectHandler() != null )
-        {
-            server = bungee.getReconnectHandler().getServer( userCon );
-        } else
-        {
-            server = AbstractReconnectHandler.getForcedHost( this );
         }
-        userCon.connect( server, true );
-
-        thisState = State.FINISHED;
     }
 
     @Override
@@ -296,6 +265,25 @@ public class InitialHandler extends PacketHandler implements PendingConnection
 
         // TODO: fire login event for plugin compatibility
         // bungee.getPluginManager().callEvent( new LoginEvent( InitialHandler.this, complete ) );
+		
+		UserConnection userCon = new UserConnection( bungee, ch, getName(), this );
+        userCon.init();
+
+        bungee.getPluginManager().callEvent( new PostLoginEvent( userCon ) );
+
+        ch.getHandle().pipeline().get( HandlerBoss.class ).setHandler( new UpstreamBridge( bungee, userCon ) );
+
+        ServerInfo server;
+        if ( bungee.getReconnectHandler() != null )
+        {
+            server = bungee.getReconnectHandler().getServer( userCon );
+        } else
+        {
+            server = AbstractReconnectHandler.getForcedHost( this );
+        }
+        userCon.connect( server, true );
+
+        thisState = State.FINISHED;
     }
 
     @Override
