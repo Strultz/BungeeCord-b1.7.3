@@ -34,7 +34,7 @@ public class ServerConnection implements Server
     @Override
     public void sendData(String channel, byte[] data)
     {
-        unsafe().sendPacket( new PacketFAPluginMessage( channel, data ) );
+        //unsafe().sendPacket( new PacketFAPluginMessage( channel, data ) );
     }
 
     @Override

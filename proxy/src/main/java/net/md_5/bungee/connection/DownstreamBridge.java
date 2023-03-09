@@ -14,20 +14,10 @@ import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.event.PluginMessageEvent;
 import net.md_5.bungee.api.event.ServerKickEvent;
-import net.md_5.bungee.api.score.Objective;
-import net.md_5.bungee.api.score.Position;
-import net.md_5.bungee.api.score.Score;
-import net.md_5.bungee.api.score.Scoreboard;
-import net.md_5.bungee.api.score.Team;
 import net.md_5.bungee.netty.ChannelWrapper;
 import net.md_5.bungee.netty.PacketHandler;
 import net.md_5.bungee.netty.PacketWrapper;
 import net.md_5.bungee.protocol.packet.Packet0KeepAlive;
-import net.md_5.bungee.protocol.packet.PacketC9PlayerListItem;
-import net.md_5.bungee.protocol.packet.PacketCEScoreboardObjective;
-import net.md_5.bungee.protocol.packet.PacketCFScoreboardScore;
-import net.md_5.bungee.protocol.packet.PacketD0DisplayScoreboard;
-import net.md_5.bungee.protocol.packet.PacketD1Team;
 import net.md_5.bungee.protocol.packet.PacketFAPluginMessage;
 import net.md_5.bungee.protocol.packet.PacketFFKick;
 
@@ -83,105 +73,8 @@ public class DownstreamBridge extends PacketHandler
     @Override
     public void handle(Packet0KeepAlive alive) throws Exception
     {
-        con.setSentPingId( alive.getRandomId() );
-        con.setSentPingTime( System.currentTimeMillis() );
-    }
-
-    @Override
-    public void handle(PacketC9PlayerListItem playerList) throws Exception
-    {
-
-        if ( !con.getTabList().onListUpdate( playerList.getUsername(), playerList.isOnline(), playerList.getPing() ) )
-        {
-            throw new CancelSendSignal();
-        }
-    }
-
-    @Override
-    public void handle(PacketCEScoreboardObjective objective) throws Exception
-    {
-        Scoreboard serverScoreboard = con.getServerSentScoreboard();
-        switch ( objective.getAction() )
-        {
-            case 0:
-                serverScoreboard.addObjective( new Objective( objective.getName(), objective.getText() ) );
-                break;
-            case 1:
-                serverScoreboard.removeObjective( objective.getName() );
-                break;
-        }
-    }
-
-    @Override
-    public void handle(PacketCFScoreboardScore score) throws Exception
-    {
-        Scoreboard serverScoreboard = con.getServerSentScoreboard();
-        switch ( score.getAction() )
-        {
-            case 0:
-                Score s = new Score( score.getItemName(), score.getScoreName(), score.getValue() );
-                serverScoreboard.removeScore( score.getItemName() );
-                serverScoreboard.addScore( s );
-                break;
-            case 1:
-                serverScoreboard.removeScore( score.getItemName() );
-                break;
-        }
-    }
-
-    @Override
-    public void handle(PacketD0DisplayScoreboard displayScoreboard) throws Exception
-    {
-        Scoreboard serverScoreboard = con.getServerSentScoreboard();
-        serverScoreboard.setName( displayScoreboard.getName() );
-        serverScoreboard.setPosition( Position.values()[displayScoreboard.getPosition()] );
-    }
-
-    @Override
-    public void handle(PacketD1Team team) throws Exception
-    {
-        Scoreboard serverScoreboard = con.getServerSentScoreboard();
-        // Remove team and move on
-        if ( team.getMode() == 1 )
-        {
-            serverScoreboard.removeTeam( team.getName() );
-            return;
-        }
-
-        // Create or get old team
-        Team t;
-        if ( team.getMode() == 0 )
-        {
-            t = new Team( team.getName() );
-            serverScoreboard.addTeam( t );
-        } else
-        {
-            t = serverScoreboard.getTeam( team.getName() );
-        }
-
-        if ( t != null )
-        {
-            if ( team.getMode() == 0 || team.getMode() == 2 )
-            {
-                t.setDisplayName( team.getDisplayName() );
-                t.setPrefix( team.getPrefix() );
-                t.setSuffix( team.getSuffix() );
-                t.setFriendlyFire( team.isFriendlyFire() );
-            }
-            if ( team.getPlayers() != null )
-            {
-                for ( String s : team.getPlayers() )
-                {
-                    if ( team.getMode() == 0 || team.getMode() == 3 )
-                    {
-                        t.addPlayer( s );
-                    } else
-                    {
-                        t.removePlayer( s );
-                    }
-                }
-            }
-        }
+        //con.setSentPingId( alive.getRandomId() );
+        //con.setSentPingTime( System.currentTimeMillis() );
     }
 
     @Override
@@ -327,6 +220,8 @@ public class DownstreamBridge extends PacketHandler
                 }
             }
         }
+		
+		throw new CancelSendSignal();
     }
 
     @Override

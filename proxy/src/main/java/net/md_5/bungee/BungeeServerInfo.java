@@ -97,7 +97,7 @@ public class BungeeServerInfo implements ServerInfo
                 server.sendData( channel, data );
             } else
             {
-                packetQueue.add( new PacketFAPluginMessage( channel, data ) );
+                //packetQueue.add( new PacketFAPluginMessage( channel, data ) );
             }
         }
     }

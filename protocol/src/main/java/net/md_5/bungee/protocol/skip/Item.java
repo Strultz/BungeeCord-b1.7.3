@@ -12,7 +12,6 @@ class Item extends Instruction
         if ( type >= 0 )
         {
             in.skipBytes( 3 );
-            SHORT_BYTE.read( in );
         }
     }
 }

@@ -97,11 +97,6 @@ public class PluginManager
         }
     }
 
-    public boolean dispatchCommand(CommandSender sender, String commandLine)
-    {
-        return dispatchCommand( sender, commandLine, null );
-    }
-
     /**
      * Execute a command if it is registered, else return false.
      *
@@ -110,7 +105,7 @@ public class PluginManager
      * arguments
      * @return whether the command was handled
      */
-    public boolean dispatchCommand(CommandSender sender, String commandLine, List<String> tabResults)
+    public boolean dispatchCommand(CommandSender sender, String commandLine)
     {
         String[] split = argsSplit.split( commandLine );
         // Check for chat that only contains " "
@@ -140,16 +135,7 @@ public class PluginManager
         String[] args = Arrays.copyOfRange( split, 1, split.length );
         try
         {
-            if ( tabResults == null )
-            {
-                command.execute( sender, args );
-            } else if ( command instanceof TabExecutor )
-            {
-                for ( String s : ( (TabExecutor) command ).onTabComplete( sender, args ) )
-                {
-                    tabResults.add( s );
-                }
-            }
+            command.execute( sender, args );
         } catch ( Exception ex )
         {
             sender.sendMessage( ChatColor.RED + "An internal error occurred whilst executing this command, please check the console log for details." );

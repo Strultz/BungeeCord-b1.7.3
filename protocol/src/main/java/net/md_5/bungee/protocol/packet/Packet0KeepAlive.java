@@ -11,7 +11,7 @@ import lombok.ToString;
 public class Packet0KeepAlive extends DefinedPacket
 {
 
-    private int randomId;
+    // private int randomId;
 
     private Packet0KeepAlive()
     {
@@ -21,13 +21,13 @@ public class Packet0KeepAlive extends DefinedPacket
     @Override
     public void read(ByteBuf buf)
     {
-        randomId = buf.readInt();
+        // randomId = buf.readInt();
     }
 
     @Override
     public void write(ByteBuf buf)
     {
-        buf.writeInt( randomId );
+        // buf.writeInt( randomId );
     }
 
     @Override

@@ -6,7 +6,6 @@ abstract class Instruction
 {
 
     static final Instruction BOOLEAN = new Jump( 1 );
-    static final Instruction BULK_CHUNK = new BulkChunk();
     static final Instruction BYTE = new Jump( 1 );
     // BYTE_INT moved down
     static final Instruction DOUBLE = new Jump( 8 );
@@ -23,11 +22,24 @@ abstract class Instruction
     static final Instruction SHORT_ITEM = new ShortHeader( ITEM );
     static final Instruction STRING = new ShortHeader( new Jump( 2 ) );
     static final Instruction USHORT_BYTE = new UnsignedShortByte();
-    static final Instruction OPTIONAL_WINDOW = new OptionalWindow();
     // Illegal forward references below this line
     static final Instruction BYTE_INT = new ByteHeader( INT );
     // Custom instructions
     static final Instruction STRING_ARRAY = new ShortHeader( STRING );
+	static final Instruction BLOCK_CHANGE_ARRAY = new BlockChangeArray();
+
+    static final Instruction BYTE_BYTE = new Instruction()
+    {
+        @Override
+        void read(ByteBuf in)
+        {
+            int size = in.readByte() & 0xFF;
+            for ( short s = 0; s < size; s++ )
+            {
+                BYTE.read(in);
+            }
+        }
+    };
 
     abstract void read(ByteBuf in);
 }

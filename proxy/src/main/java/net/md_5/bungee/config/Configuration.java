@@ -5,7 +5,7 @@ import gnu.trove.map.TMap;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
-import java.util.UUID;
+//import java.util.UUID;
 import lombok.Getter;
 import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.config.ConfigurationAdapter;
@@ -28,7 +28,7 @@ public class Configuration
     /**
      * UUID used for metrics.
      */
-    private String uuid = UUID.randomUUID().toString();
+    //private String uuid = UUID.randomUUID().toString();
     /**
      * Set of all listeners.
      */
@@ -52,7 +52,7 @@ public class Configuration
 
         listeners = adapter.getListeners();
         timeout = adapter.getInt( "timeout", timeout );
-        uuid = adapter.getString( "stats", uuid );
+        //uuid = adapter.getString( "stats", uuid );
         onlineMode = adapter.getBoolean( "online_mode", onlineMode );
         playerLimit = adapter.getInt( "player_limit", playerLimit );
         throttle = adapter.getInt( "connection_throttle", throttle );

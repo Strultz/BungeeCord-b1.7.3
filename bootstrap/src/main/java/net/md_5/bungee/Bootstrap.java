@@ -39,7 +39,8 @@ public class Bootstrap
             return;
         }
 
-        if ( !System.getProperty( "java.version" ).startsWith( "1.7" ) )
+		// No no no.
+        /*if ( !System.getProperty( "java.version" ).startsWith( "1.7" ) )
         {
             System.err.println( "*** ERROR *** BungeeCord requires Java 7 to function!" );
             return;
@@ -57,7 +58,7 @@ public class Bootstrap
                 System.err.println( "*** Server will start in 30 seconds ***" );
                 Thread.sleep( TimeUnit.SECONDS.toMillis( 30 ) );
             }
-        }
+        }*/
 
         System.setProperty( "java.net.preferIPv4Stack", "true" );
 

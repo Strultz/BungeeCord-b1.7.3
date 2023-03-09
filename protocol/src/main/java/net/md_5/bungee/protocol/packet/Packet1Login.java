@@ -13,32 +13,26 @@ public class Packet1Login extends DefinedPacket
 
     protected int entityId;
     protected String levelType;
-    protected byte gameMode;
+    protected long seed;
     protected int dimension;
-    protected byte difficulty;
-    protected byte unused;
-    protected byte maxPlayers;
 
     protected Packet1Login()
     {
         super( 0x01 );
     }
 
-    public Packet1Login(int entityId, String levelType, byte gameMode, byte dimension, byte difficulty, byte unused, byte maxPlayers)
+    public Packet1Login(int entityId, String levelType, long seed, byte dimension)
     {
-        this( entityId, levelType, gameMode, (int) dimension, difficulty, unused, maxPlayers );
+        this( entityId, levelType, seed, (int) dimension );
     }
 
-    public Packet1Login(int entityId, String levelType, byte gameMode, int dimension, byte difficulty, byte unused, byte maxPlayers)
+    public Packet1Login(int entityId, String levelType, long seed, int dimension)
     {
         this();
         this.entityId = entityId;
         this.levelType = levelType;
-        this.gameMode = gameMode;
+        this.seed = seed;
         this.dimension = dimension;
-        this.difficulty = difficulty;
-        this.unused = unused;
-        this.maxPlayers = maxPlayers;
     }
 
     @Override
@@ -46,11 +40,8 @@ public class Packet1Login extends DefinedPacket
     {
         entityId = buf.readInt();
         levelType = readString( buf );
-        gameMode = buf.readByte();
+        seed = buf.readLong();
         dimension = buf.readByte();
-        difficulty = buf.readByte();
-        unused = buf.readByte();
-        maxPlayers = buf.readByte();
     }
 
     @Override
@@ -58,11 +49,8 @@ public class Packet1Login extends DefinedPacket
     {
         buf.writeInt( entityId );
         writeString( levelType, buf );
-        buf.writeByte( gameMode );
+        buf.writeLong( seed );
         buf.writeByte( dimension );
-        buf.writeByte( difficulty );
-        buf.writeByte( unused );
-        buf.writeByte( maxPlayers );
     }
 
     @Override

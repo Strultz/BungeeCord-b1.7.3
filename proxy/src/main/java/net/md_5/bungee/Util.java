@@ -70,4 +70,27 @@ public class Util
 
         return ( ret.length() == 0 ) ? "" : ret.substring( 0, ret.length() - separators.length() );
     }
+	
+	/**
+     * Serializes address string to long
+     *
+     * @param address Remote client address
+     * @return serialized address as long
+     */
+    public static long serializeAddress(String address)
+    {
+        String[] ipAddressInArray = address.split("\\.");
+
+        long result = 0;
+
+        // https://mkyong.com/java/java-convert-ip-address-to-decimal-number/
+        for (int i = 0; i < ipAddressInArray.length; i++)
+        {
+            int power = 3 - i;
+            int ip = Integer.parseInt(ipAddressInArray[i]);
+
+            result += ip * Math.pow(256, power);
+        }
+        return result;
+    }
 }

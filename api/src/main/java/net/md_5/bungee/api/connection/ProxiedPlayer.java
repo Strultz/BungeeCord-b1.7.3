@@ -2,7 +2,6 @@ package net.md_5.bungee.api.connection;
 
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.config.ServerInfo;
-import net.md_5.bungee.api.tab.TabListHandler;
 
 /**
  * Represents a player who's connection is being connected to somewhere else,
@@ -19,7 +18,7 @@ public interface ProxiedPlayer extends Connection, CommandSender
     String getDisplayName();
 
     /**
-     * Sets this players display name to be used as their nametag and tab list
+     * Sets this players display name to be used as their nametag
      * name.
      *
      * @param name the name to set
@@ -47,7 +46,7 @@ public interface ProxiedPlayer extends Connection, CommandSender
      *
      * @return the current ping time
      */
-    int getPing();
+    //int getPing();
 
     /**
      * Send a plugin message to this player.
@@ -70,21 +69,6 @@ public interface ProxiedPlayer extends Connection, CommandSender
      * @param message the message to say
      */
     void chat(String message);
-
-    /**
-     * Sets the new tab list for the user. At this stage it is not advisable to
-     * change after the user has logged in!
-     *
-     * @param list the new list
-     */
-    void setTabList(TabListHandler list);
-
-    /**
-     * Get the current tab list.
-     *
-     * @return the tab list in use by this user
-     */
-    TabListHandler getTabList();
 
     /**
      * Get the server which this player will be sent to next time the log in.

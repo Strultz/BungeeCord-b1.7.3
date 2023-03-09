@@ -23,47 +23,7 @@ public abstract class AbstractPacketHandler
     {
     }
 
-    public void handle(Packet2CEntityProperties properties) throws Exception
-    {
-    }
-
-    public void handle(PacketC9PlayerListItem playerList) throws Exception
-    {
-    }
-
-    public void handle(PacketCCSettings settings) throws Exception
-    {
-    }
-
-    public void handle(PacketCDClientStatus clientStatus) throws Exception
-    {
-    }
-
-    public void handle(PacketCEScoreboardObjective objective) throws Exception
-    {
-    }
-
-    public void handle(PacketCFScoreboardScore score) throws Exception
-    {
-    }
-
-    public void handle(PacketD0DisplayScoreboard displayScoreboard) throws Exception
-    {
-    }
-
-    public void handle(PacketD1Team team) throws Exception
-    {
-    }
-
     public void handle(PacketFAPluginMessage pluginMessage) throws Exception
-    {
-    }
-
-    public void handle(PacketFCEncryptionResponse encryptResponse) throws Exception
-    {
-    }
-
-    public void handle(PacketFDEncryptionRequest encryptRequest) throws Exception
     {
     }
 
@@ -72,10 +32,6 @@ public abstract class AbstractPacketHandler
     }
 
     public void handle(PacketFFKick kick) throws Exception
-    {
-    }
-
-    public void handle(PacketCBTabComplete tabComplete) throws Exception
     {
     }
 }

@@ -52,7 +52,6 @@ import net.md_5.bungee.api.config.ServerInfo;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.plugin.PluginManager;
-import net.md_5.bungee.api.tab.CustomTabList;
 import net.md_5.bungee.command.*;
 import net.md_5.bungee.config.YamlConfig;
 import net.md_5.bungee.log.LoggingOutputStream;
@@ -62,7 +61,6 @@ import net.md_5.bungee.protocol.packet.Packet3Chat;
 import net.md_5.bungee.protocol.packet.PacketFAPluginMessage;
 import net.md_5.bungee.protocol.Vanilla;
 import net.md_5.bungee.query.RemoteQuery;
-import net.md_5.bungee.tab.Custom;
 import net.md_5.bungee.util.CaseInsensitiveMap;
 import org.fusesource.jansi.AnsiConsole;
 
@@ -89,7 +87,7 @@ public class BungeeCord extends ProxyServer
      * locations.yml save thread.
      */
     private final Timer saveThread = new Timer( "Reconnect Saver" );
-    private final Timer metricsThread = new Timer( "Metrics Thread" );
+    //private final Timer metricsThread = new Timer( "Metrics Thread" );
     /**
      * Server socket listener.
      */
@@ -150,7 +148,6 @@ public class BungeeCord extends ProxyServer
         Log.setOutput( new PrintStream( ByteStreams.nullOutputStream() ) ); // TODO: Bug JLine
         AnsiConsole.systemInstall();
         consoleReader = new ConsoleReader();
-        consoleReader.setExpandEvents( false );
 
         logger = new BungeeLogger( this );
         System.setErr( new PrintStream( new LoggingOutputStream( logger, Level.SEVERE ), true ) );
@@ -203,7 +200,7 @@ public class BungeeCord extends ProxyServer
                 }
             }
         }, 0, TimeUnit.MINUTES.toMillis( 5 ) );
-        metricsThread.scheduleAtFixedRate( new Metrics(), 0, TimeUnit.MINUTES.toMillis( Metrics.PING_INTERVAL ) );
+        //metricsThread.scheduleAtFixedRate( new Metrics(), 0, TimeUnit.MINUTES.toMillis( Metrics.PING_INTERVAL ) );
     }
 
     public void startListeners()
@@ -313,7 +310,7 @@ public class BungeeCord extends ProxyServer
                     reconnectHandler.close();
                 }
                 saveThread.cancel();
-                metricsThread.cancel();
+                //metricsThread.cancel();
 
                 // TODO: Fix this shit
                 getLogger().info( "Disabling plugins" );
@@ -481,9 +478,7 @@ public class BungeeCord extends ProxyServer
     public void broadcast(String message)
     {
         getConsole().sendMessage( message );
-        // TODO: Here too
-        String encoded = BungeeCord.getInstance().gson.toJson( message );
-        broadcast( new Packet3Chat( "{\"text\":" + encoded + "}" ) );
+        broadcast( new Packet3Chat( message ) );
     }
 
     public void addConnection(UserConnection con)
@@ -508,12 +503,6 @@ public class BungeeCord extends ProxyServer
         {
             connectionLock.writeLock().unlock();
         }
-    }
-
-    @Override
-    public CustomTabList customTabList(ProxiedPlayer player)
-    {
-        return new Custom( player );
     }
 
     public Collection<String> getDisabledCommands()

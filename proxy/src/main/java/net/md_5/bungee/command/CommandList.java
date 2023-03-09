@@ -39,7 +39,7 @@ public class CommandList extends Command
             }
             Collections.sort( players, String.CASE_INSENSITIVE_ORDER );
 
-            sender.sendMessage( ProxyServer.getInstance().getTranslation( "command_list", server.getName(), server.getPlayers().size(), Util.format( players, ChatColor.RESET + ", " ) ) );
+            sender.sendMessage( ProxyServer.getInstance().getTranslation( "command_list", server.getName(), server.getPlayers().size(), Util.format( players, ChatColor.WHITE + ", " ) ) );
         }
 
         sender.sendMessage( ProxyServer.getInstance().getTranslation( "total_players", ProxyServer.getInstance().getOnlineCount() ) );
