@@ -41,6 +41,7 @@ public class Configuration
      * Should we check minecraft.net auth.
      */
     private boolean onlineMode = false;
+	private boolean ipForwarding = true;
     private int playerLimit = -1;
     private Collection<String> disabledCommands;
     private int throttle = 4000;
@@ -53,6 +54,7 @@ public class Configuration
         listeners = adapter.getListeners();
         timeout = adapter.getInt( "timeout", timeout );
         //uuid = adapter.getString( "stats", uuid );
+		ipForwarding = adapter.getBoolean( "ip_forwarding", ipForwarding );
         onlineMode = adapter.getBoolean( "online_mode", onlineMode );
         playerLimit = adapter.getInt( "player_limit", playerLimit );
         throttle = adapter.getInt( "connection_throttle", throttle );

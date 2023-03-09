@@ -73,8 +73,8 @@ public class ServerConnector extends PacketHandler
 
         channel.write( user.getPendingConnection().getHandshake() );
 
-        // IP Forwarding ( i mean to be honest, why would anyone ever disable this? )
-        boolean flag = true;//BungeeCord.getInstance().config.isIpForwarding();
+        // IP Forwarding
+        boolean flag = BungeeCord.getInstance().config.isIpForwarding();
         long address = flag ? Util.serializeAddress(user.getAddress().getAddress().getHostAddress()) : 0;
         byte header = (byte) (flag ? MAGIC_HEADER : 0);
         // end
