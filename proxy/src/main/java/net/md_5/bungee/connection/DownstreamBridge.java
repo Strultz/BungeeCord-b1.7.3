@@ -81,7 +81,7 @@ public class DownstreamBridge extends PacketHandler
     public void handle(PacketFAPluginMessage pluginMessage) throws Exception
     {
         DataInput in = pluginMessage.getStream();
-        PluginMessageEvent event = new PluginMessageEvent( con.getServer(), con, pluginMessage.getTag(), pluginMessage.getData().clone() );
+        PluginMessageEvent event = new PluginMessageEvent( con.getServer(), con, pluginMessage.getData().clone() );
 
         if ( bungee.getPluginManager().callEvent( event ).isCancelled() )
         {

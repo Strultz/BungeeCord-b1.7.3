@@ -16,7 +16,6 @@ import net.md_5.bungee.protocol.MinecraftOutput;
 @EqualsAndHashCode(callSuper = false)
 public class PacketFAPluginMessage extends DefinedPacket
 {
-
     private byte[] data;
 
     private PacketFAPluginMessage()

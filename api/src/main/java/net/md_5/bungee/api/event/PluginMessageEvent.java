@@ -20,18 +20,13 @@ public class PluginMessageEvent extends TargetedEvent implements Cancellable
      */
     private boolean cancelled;
     /**
-     * Tag specified for this plugin message.
-     */
-    private final String tag;
-    /**
      * Data contained in this plugin message.
      */
     private final byte[] data;
 
-    public PluginMessageEvent(Connection sender, Connection receiver, String tag, byte[] data)
+    public PluginMessageEvent(Connection sender, Connection receiver, byte[] data)
     {
         super( sender, receiver );
-        this.tag = tag;
         this.data = data;
     }
 }
