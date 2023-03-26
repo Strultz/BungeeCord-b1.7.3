@@ -266,9 +266,9 @@ public final class UserConnection implements ProxiedPlayer
     }
 
     @Override
-    public void sendData(String channel, byte[] data)
+    public void sendData(byte[] data)
     {
-        unsafe().sendPacket( new PacketFAPluginMessage( channel, data ) );
+        unsafe().sendPacket( new PacketFAPluginMessage( data ) );
     }
 
     @Override

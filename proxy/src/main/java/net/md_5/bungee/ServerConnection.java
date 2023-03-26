@@ -32,9 +32,9 @@ public class ServerConnection implements Server
     };
 
     @Override
-    public void sendData(String channel, byte[] data)
+    public void sendData(byte[] data)
     {
-        //unsafe().sendPacket( new PacketFAPluginMessage( channel, data ) );
+        unsafe().sendPacket( new PacketFAPluginMessage( data ) );
     }
 
     @Override

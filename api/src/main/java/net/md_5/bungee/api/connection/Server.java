@@ -21,5 +21,5 @@ public interface Server extends Connection
      * @param channel the channel to send this data via
      * @param data the data to send
      */
-    public abstract void sendData(String channel, byte[] data);
+    public abstract void sendData(byte[] data);
 }

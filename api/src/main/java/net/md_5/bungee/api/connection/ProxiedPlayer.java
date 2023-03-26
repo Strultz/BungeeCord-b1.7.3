@@ -54,7 +54,7 @@ public interface ProxiedPlayer extends Connection, CommandSender
      * @param channel the channel to send this data via
      * @param data the data to send
      */
-    void sendData(String channel, byte[] data);
+    void sendData(byte[] data);
 
     /**
      * Get the pending connection that belongs to this player.
