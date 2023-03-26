@@ -58,7 +58,7 @@ public interface ServerInfo
      * @param channel the channel to send this data via
      * @param data the data to send
      */
-    void sendData(String channel, byte[] data);
+    void sendData(byte[] data);
 
     /**
      * Asynchronously gets the current player count on this server.
