@@ -84,9 +84,8 @@ public class BungeeServerInfo implements ServerInfo
 
     // TODO: Don't like this method
     @Override
-    public void sendData(String channel, byte[] data)
+    public void sendData(byte[] data)
     {
-        Preconditions.checkNotNull( channel, "channel" );
         Preconditions.checkNotNull( data, "data" );
 
         synchronized ( packetQueue )
@@ -94,10 +93,10 @@ public class BungeeServerInfo implements ServerInfo
             Server server = ( players.isEmpty() ) ? null : players.iterator().next().getServer();
             if ( server != null )
             {
-                server.sendData( channel, data );
+                server.sendData( data );
             } else
             {
-                //packetQueue.add( new PacketFAPluginMessage( channel, data ) );
+                packetQueue.add( new PacketFAPluginMessage( data ) );
             }
         }
     }

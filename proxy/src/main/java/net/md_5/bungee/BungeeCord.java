@@ -425,32 +425,6 @@ public class BungeeCord extends ProxyServer
     }
 
     @Override
-    @Synchronized("pluginChannels")
-    public void registerChannel(String channel)
-    {
-        pluginChannels.add( channel );
-    }
-
-    @Override
-    @Synchronized("pluginChannels")
-    public void unregisterChannel(String channel)
-    {
-        pluginChannels.remove( channel );
-    }
-
-    @Override
-    @Synchronized("pluginChannels")
-    public Collection<String> getChannels()
-    {
-        return Collections.unmodifiableCollection( pluginChannels );
-    }
-
-    public PacketFAPluginMessage registerChannels()
-    {
-        return new PacketFAPluginMessage( "REGISTER", Util.format( pluginChannels, "\00" ).getBytes() );
-    }
-
-    @Override
     public byte getProtocolVersion()
     {
         return Vanilla.PROTOCOL_VERSION;

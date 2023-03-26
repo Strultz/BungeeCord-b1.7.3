@@ -17,7 +17,6 @@ import net.md_5.bungee.protocol.MinecraftOutput;
 public class PacketFAPluginMessage extends DefinedPacket
 {
 
-    private String tag;
     private byte[] data;
 
     private PacketFAPluginMessage()
@@ -25,24 +24,21 @@ public class PacketFAPluginMessage extends DefinedPacket
         super( 0xFA );
     }
 
-    public PacketFAPluginMessage(String tag, byte[] data)
+    public PacketFAPluginMessage(byte[] data)
     {
         this();
-        this.tag = tag;
         this.data = data;
     }
 
     @Override
     public void read(ByteBuf buf)
     {
-        tag = readString( buf );
         data = readArray( buf );
     }
 
     @Override
     public void write(ByteBuf buf)
     {
-        writeString( tag, buf );
         writeArray( data, buf );
     }
 
