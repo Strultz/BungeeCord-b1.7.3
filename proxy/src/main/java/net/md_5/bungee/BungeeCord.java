@@ -108,7 +108,6 @@ public class BungeeCord extends ProxyServer
     @Getter
     @Setter
     private ConfigurationAdapter configurationAdapter = new YamlConfig();
-    private final Collection<String> pluginChannels = new HashSet<>();
     @Getter
     private final File pluginsFolder = new File( "plugins" );
     @Getter
