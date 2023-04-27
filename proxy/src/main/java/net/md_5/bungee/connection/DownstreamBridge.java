@@ -95,13 +95,13 @@ public class DownstreamBridge extends PacketHandler
         {
             // Read data from server
             String target = in.readUTF();
-            //String channel = in.readUTF();
+            String channel = in.readUTF();
             short len = in.readShort();
             byte[] data = new byte[ len ];
             in.readFully( data );
 
             // Prepare new data to send
-            //out.writeUTF( channel );
+            out.writeUTF( channel );
             out.writeShort( data.length );
             out.write( data );
             byte[] payload = out.toByteArray();
@@ -217,8 +217,8 @@ public class DownstreamBridge extends PacketHandler
                 con.getServer().sendData( b );
             }
         }
-
-        throw new CancelSendSignal();
+		
+		throw new CancelSendSignal();
     }
 
     @Override
