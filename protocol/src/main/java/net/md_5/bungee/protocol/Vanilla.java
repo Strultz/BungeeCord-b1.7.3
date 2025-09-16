@@ -11,6 +11,7 @@ import net.md_5.bungee.protocol.packet.Packet1Login;
 import net.md_5.bungee.protocol.packet.Packet2Handshake;
 import net.md_5.bungee.protocol.packet.Packet3Chat;
 import net.md_5.bungee.protocol.packet.Packet9Respawn;
+import net.md_5.bungee.protocol.packet.Packet65Close;
 import net.md_5.bungee.protocol.packet.PacketFAPluginMessage;
 import net.md_5.bungee.protocol.packet.PacketFEPing;
 import net.md_5.bungee.protocol.packet.PacketFFKick;
@@ -43,6 +44,7 @@ public class Vanilla implements Protocol
         classes[0x02] = Packet2Handshake.class;
         classes[0x03] = Packet3Chat.class;
         classes[0x09] = Packet9Respawn.class;
+        classes[0x65] = Packet65Close.class;
         classes[0xFA] = PacketFAPluginMessage.class;
         classes[0xFE] = PacketFEPing.class;
         classes[0xFF] = PacketFFKick.class;

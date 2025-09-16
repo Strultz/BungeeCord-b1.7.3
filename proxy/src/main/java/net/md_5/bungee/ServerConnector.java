@@ -25,6 +25,7 @@ import net.md_5.bungee.protocol.MinecraftOutput;
 import net.md_5.bungee.protocol.packet.DefinedPacket;
 import net.md_5.bungee.protocol.packet.Packet1Login;
 import net.md_5.bungee.protocol.packet.Packet9Respawn;
+import net.md_5.bungee.protocol.packet.Packet65Close;
 import net.md_5.bungee.protocol.packet.PacketFAPluginMessage;
 import net.md_5.bungee.protocol.packet.PacketFFKick;
 import net.md_5.bungee.protocol.Vanilla;
@@ -125,7 +126,7 @@ public class ServerConnector extends PacketHandler
 
         synchronized ( user.getSwitchMutex() )
         {
-            if ( user.getServer() == null )
+            /*if ( user.getServer() == null )
             {
                 // Once again, first connection
                 user.setClientEntityId( login.getEntityId() );
@@ -141,6 +142,23 @@ public class ServerConnector extends PacketHandler
                 user.setServerEntityId( login.getEntityId() );
                 user.unsafe().sendPacket( new Packet9Respawn( login.getDimension() ) );
 
+                // Remove from old servers
+                user.getServer().setObsolete( true );
+                user.getServer().disconnect( "Quitting" );
+            }*/
+            
+            // Once again, first connection
+            user.setClientEntityId( login.getEntityId() );
+            user.setServerEntityId( login.getEntityId() );
+
+            // Set tab list size, this sucks balls, TODO: what shall we do about packet mutability
+            Packet1Login modLogin = new Packet1Login( login.getEntityId(), login.getLevelType(), login.getSeed(), (byte) login.getDimension() );
+            user.unsafe().sendPacket( modLogin );
+            
+            if ( user.getServer() != null )
+            {
+                user.sendDimensionSwitch();
+                
                 // Remove from old servers
                 user.getServer().setObsolete( true );
                 user.getServer().disconnect( "Quitting" );
