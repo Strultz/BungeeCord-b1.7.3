@@ -18,7 +18,7 @@ import net.md_5.bungee.netty.ChannelWrapper;
 import net.md_5.bungee.netty.PacketHandler;
 import net.md_5.bungee.netty.PacketWrapper;
 import net.md_5.bungee.protocol.packet.Packet0KeepAlive;
-import net.md_5.bungee.protocol.packet.PacketFAPluginMessage;
+import net.md_5.bungee.protocol.packet.PacketF9BungeeMessage;
 import net.md_5.bungee.protocol.packet.PacketFFKick;
 
 @RequiredArgsConstructor
@@ -78,10 +78,10 @@ public class DownstreamBridge extends PacketHandler
     }
 
     @Override
-    public void handle(PacketFAPluginMessage pluginMessage) throws Exception
+    public void handle(PacketF9BungeeMessage bungeeMessage) throws Exception
     {
-        DataInput in = pluginMessage.getStream();
-        PluginMessageEvent event = new PluginMessageEvent( con.getServer(), con, pluginMessage.getData().clone() );
+        DataInput in = bungeeMessage.getStream();
+        PluginMessageEvent event = new PluginMessageEvent( con.getServer(), con, bungeeMessage.getData().clone() );
 
         if ( bungee.getPluginManager().callEvent( event ).isCancelled() )
         {

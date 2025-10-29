@@ -13,7 +13,7 @@ import net.md_5.bungee.netty.PacketHandler;
 import net.md_5.bungee.netty.PacketWrapper;
 import net.md_5.bungee.protocol.packet.Packet0KeepAlive;
 import net.md_5.bungee.protocol.packet.Packet3Chat;
-import net.md_5.bungee.protocol.packet.PacketFAPluginMessage;
+import net.md_5.bungee.protocol.packet.PacketF9BungeeMessage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,7 +91,7 @@ public class UpstreamBridge extends PacketHandler
     }
 
     @Override
-    public void handle(PacketFAPluginMessage pluginMessage) throws Exception
+    public void handle(PacketF9BungeeMessage bungeeMessage) throws Exception
     {
         throw new CancelSendSignal();
     }

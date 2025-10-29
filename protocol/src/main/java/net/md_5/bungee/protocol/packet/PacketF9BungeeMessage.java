@@ -14,16 +14,16 @@ import net.md_5.bungee.protocol.MinecraftOutput;
 @Getter
 @ToString
 @EqualsAndHashCode(callSuper = false)
-public class PacketFAPluginMessage extends DefinedPacket
+public class PacketF9BungeeMessage extends DefinedPacket
 {
     private byte[] data;
 
-    private PacketFAPluginMessage()
+    private PacketF9BungeeMessage()
     {
-        super( 0xFA );
+        super( 0xF9 );
     }
 
-    public PacketFAPluginMessage(byte[] data)
+    public PacketF9BungeeMessage(byte[] data)
     {
         this();
         this.data = data;

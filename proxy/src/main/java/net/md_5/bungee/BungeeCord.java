@@ -58,7 +58,7 @@ import net.md_5.bungee.log.LoggingOutputStream;
 import net.md_5.bungee.netty.PipelineUtils;
 import net.md_5.bungee.protocol.packet.DefinedPacket;
 import net.md_5.bungee.protocol.packet.Packet3Chat;
-import net.md_5.bungee.protocol.packet.PacketFAPluginMessage;
+import net.md_5.bungee.protocol.packet.PacketF9BungeeMessage;
 import net.md_5.bungee.protocol.Vanilla;
 import net.md_5.bungee.query.RemoteQuery;
 import net.md_5.bungee.util.CaseInsensitiveMap;

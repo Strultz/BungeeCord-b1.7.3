@@ -40,7 +40,7 @@ import net.md_5.bungee.protocol.Vanilla;
 import net.md_5.bungee.protocol.packet.DefinedPacket;
 import net.md_5.bungee.protocol.packet.Packet1Login;
 import net.md_5.bungee.protocol.packet.Packet2Handshake;
-import net.md_5.bungee.protocol.packet.PacketFAPluginMessage;
+import net.md_5.bungee.protocol.packet.PacketF9BungeeMessage;
 import net.md_5.bungee.protocol.packet.PacketFEPing;
 import net.md_5.bungee.protocol.packet.PacketFFKick;
 import net.md_5.bungee.api.AbstractReconnectHandler;
@@ -57,10 +57,6 @@ public class InitialHandler extends PacketHandler implements PendingConnection
     private final ListenerInfo listener;
     @Getter
     private Packet2Handshake handshake;
-    /*@Getter
-    private List<PacketFAPluginMessage> loginMessages = new ArrayList<>();
-    @Getter
-    private List<PacketFAPluginMessage> registerMessages = new ArrayList<>();*/
     private State thisState = State.HANDSHAKE;
     private final Unsafe unsafe = new Unsafe()
     {
@@ -96,32 +92,8 @@ public class InitialHandler extends PacketHandler implements PendingConnection
     }
 
     @Override
-    public void handle(PacketFAPluginMessage pluginMessage) throws Exception
+    public void handle(PacketF9BungeeMessage pluginMessage) throws Exception
     {
-        /*if ( pluginMessage.getTag().equals( "MC|PingHost" ) )
-        {
-            if ( pingFuture.cancel( false ) )
-            {
-                MinecraftInput in = pluginMessage.getMCStream();
-                version = in.readByte();
-                String connectHost = in.readString();
-                int connectPort = in.readInt();
-                this.vHost = new InetSocketAddress( connectHost, connectPort );
-
-                respondToPing();
-            }
-
-            return;
-        }
-
-        // TODO: Unregister?
-        if ( pluginMessage.getTag().equals( "REGISTER" ) )
-        {
-            registerMessages.add( pluginMessage );
-        } else
-        {
-            loginMessages.add( pluginMessage );
-        }*/
     }
 
     private void respondToPing()

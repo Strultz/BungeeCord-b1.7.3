@@ -25,8 +25,7 @@ import net.md_5.bungee.protocol.MinecraftOutput;
 import net.md_5.bungee.protocol.packet.DefinedPacket;
 import net.md_5.bungee.protocol.packet.Packet1Login;
 import net.md_5.bungee.protocol.packet.Packet9Respawn;
-import net.md_5.bungee.protocol.packet.Packet65Close;
-import net.md_5.bungee.protocol.packet.PacketFAPluginMessage;
+import net.md_5.bungee.protocol.packet.PacketF9BungeeMessage;
 import net.md_5.bungee.protocol.packet.PacketFFKick;
 import net.md_5.bungee.protocol.Vanilla;
 
@@ -66,11 +65,12 @@ public class ServerConnector extends PacketHandler
     {
         this.ch = channel;
 
+        // TODO: Figure out if this is needed or not
         /*ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeUTF( "Login" );
         out.writeUTF( user.getAddress().getHostString() );
         out.writeInt( user.getAddress().getPort() );*/
-        //channel.write( new PacketFAPluginMessage( "BungeeCord", out.toByteArray() ) );
+        //channel.write( new PacketF9BungeeMessage( out.toByteArray() ) );
 
         channel.write( user.getPendingConnection().getHandshake() );
 
@@ -107,46 +107,8 @@ public class ServerConnector extends PacketHandler
             }
         }
 
-        /*for ( PacketFAPluginMessage message : user.getPendingConnection().getRegisterMessages() )
-        {
-            ch.write( message );
-        }
-        if ( !sentMessages )
-        {
-            for ( PacketFAPluginMessage message : user.getPendingConnection().getLoginMessages() )
-            {
-                ch.write( message );
-            }
-        }*/
-
-        /*if ( user.getSettings() != null )
-        {
-            ch.write( user.getSettings() );
-        }*/
-
         synchronized ( user.getSwitchMutex() )
         {
-            /*if ( user.getServer() == null )
-            {
-                // Once again, first connection
-                user.setClientEntityId( login.getEntityId() );
-                user.setServerEntityId( login.getEntityId() );
-
-                // Set tab list size, this sucks balls, TODO: what shall we do about packet mutability
-                Packet1Login modLogin = new Packet1Login( login.getEntityId(), login.getLevelType(), login.getSeed(), (byte) login.getDimension() );
-                user.unsafe().sendPacket( modLogin );
-            } else
-            {
-                user.sendDimensionSwitch();
-
-                user.setServerEntityId( login.getEntityId() );
-                user.unsafe().sendPacket( new Packet9Respawn( login.getDimension() ) );
-
-                // Remove from old servers
-                user.getServer().setObsolete( true );
-                user.getServer().disconnect( "Quitting" );
-            }*/
-            
             // Once again, first connection
             user.setClientEntityId( login.getEntityId() );
             user.setServerEntityId( login.getEntityId() );
@@ -215,9 +177,8 @@ public class ServerConnector extends PacketHandler
     }
 
     @Override
-    public void handle(PacketFAPluginMessage pluginMessage) throws Exception
+    public void handle(PacketF9BungeeMessage bungeeMessage) throws Exception
     {
-        // TODO
     }
 
     @Override

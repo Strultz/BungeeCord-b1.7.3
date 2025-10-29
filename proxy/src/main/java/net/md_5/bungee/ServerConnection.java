@@ -8,7 +8,7 @@ import lombok.Setter;
 import net.md_5.bungee.api.connection.Server;
 import net.md_5.bungee.netty.ChannelWrapper;
 import net.md_5.bungee.protocol.packet.DefinedPacket;
-import net.md_5.bungee.protocol.packet.PacketFAPluginMessage;
+import net.md_5.bungee.protocol.packet.PacketF9BungeeMessage;
 import net.md_5.bungee.protocol.packet.PacketFFKick;
 
 @RequiredArgsConstructor
@@ -34,7 +34,7 @@ public class ServerConnection implements Server
     @Override
     public void sendData(byte[] data)
     {
-        unsafe().sendPacket( new PacketFAPluginMessage( data ) );
+        unsafe().sendPacket( new PacketF9BungeeMessage( data ) );
     }
 
     @Override

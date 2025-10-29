@@ -26,7 +26,7 @@ import net.md_5.bungee.connection.PingHandler;
 import net.md_5.bungee.netty.HandlerBoss;
 import net.md_5.bungee.netty.PipelineUtils;
 import net.md_5.bungee.protocol.packet.DefinedPacket;
-import net.md_5.bungee.protocol.packet.PacketFAPluginMessage;
+import net.md_5.bungee.protocol.packet.PacketF9BungeeMessage;
 
 @RequiredArgsConstructor
 public class BungeeServerInfo implements ServerInfo
@@ -96,7 +96,7 @@ public class BungeeServerInfo implements ServerInfo
                 server.sendData( data );
             } else
             {
-                packetQueue.add( new PacketFAPluginMessage( data ) );
+                packetQueue.add( new PacketF9BungeeMessage( data ) );
             }
         }
     }

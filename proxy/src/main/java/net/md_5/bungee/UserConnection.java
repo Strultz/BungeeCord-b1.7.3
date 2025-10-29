@@ -32,7 +32,7 @@ import net.md_5.bungee.netty.PacketWrapper;
 import net.md_5.bungee.netty.PipelineUtils;
 import net.md_5.bungee.protocol.packet.DefinedPacket;
 import net.md_5.bungee.protocol.packet.Packet3Chat;
-import net.md_5.bungee.protocol.packet.PacketFAPluginMessage;
+import net.md_5.bungee.protocol.packet.PacketF9BungeeMessage;
 import net.md_5.bungee.protocol.packet.PacketFFKick;
 import net.md_5.bungee.util.CaseInsensitiveSet;
 
@@ -268,7 +268,7 @@ public final class UserConnection implements ProxiedPlayer
     @Override
     public void sendData(byte[] data)
     {
-        unsafe().sendPacket( new PacketFAPluginMessage( data ) );
+        unsafe().sendPacket( new PacketF9BungeeMessage( data ) );
     }
 
     @Override

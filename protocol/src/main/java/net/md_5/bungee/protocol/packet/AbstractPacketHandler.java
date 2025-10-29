@@ -23,11 +23,7 @@ public abstract class AbstractPacketHandler
     {
     }
 
-    public void handle(Packet65Close close) throws Exception
-    {
-    }
-
-    public void handle(PacketFAPluginMessage pluginMessage) throws Exception
+    public void handle(PacketF9BungeeMessage bungeeMessage) throws Exception
     {
     }
 
